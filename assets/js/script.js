@@ -3,10 +3,22 @@
 // documentation at: https://openweathermap.org/forecast5#name5
 // api for finding lat and lon at: https://openweathermap.org/api/geocoding-api
 
-let weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=c57cbf4f07cb44866a70fe1c66c5d6fb';
-// Change Austin to a different city for a different result
+const searchText = $("#citySearch");
+const searchButton = $("#searchButton");
 
-// Api Call Logic, log data to console
+let cityName = "";
+
+let latLonUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=c57cbf4f07cb44866a70fe1c66c5d6fb';
+// url takes lat and long of city to perform weather forecast
+
+let cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=c57cbf4f07cb44866a70fe1c66c5d6fb`
+// user searches for a city name, so we first use an api call to get that city's lat and long, then plug it into the weather api
+
+function getLatLong(city) {
+
+}
+
+// Weather Api Call function
 function getWeather(url) {
 
     fetch(url)
@@ -19,8 +31,19 @@ function getWeather(url) {
         })
 }
 
-// Call Api function
-getWeather(weatherUrl);
+
+$(searchButton).on("click", function(event) {
+    event.preventDefault();
+    cityName = searchText.val();
+
+    let trimmedCityUrl = cityName.split(" ").join("%20");
+
+    getLatLon(trimmedCityUrl);
+})
+
+
+
+
 
 
 
