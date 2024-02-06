@@ -8,6 +8,31 @@ const searchButton = $("#searchButton");
 
 // order of events are numbered - input will always start with '1' then count up through the steps
 
+// ----------------------------- 4 ------------------------------
+// function to render everything onto the page
+function render(data){
+    // declare all needed variables for name, date, weather, temp, wind, and humidity
+    let cityName = data.city.name;
+    let cityDate = data.list[0].dt_txt.split(" ").shift();
+    let cityWeather = data.list[0].weather[0].main;
+    let cityTemp = ((data.list[0].main.temp-273.15)*9/5+32) + " °F";
+    let cityWind = data.list[0].main.humidity + "%" ;
+    let cityHumid = data.list[0].wind.speed + " mph" ;
+
+    // testing
+    console.log(
+        `
+        city name = ${cityName}, 
+        date = ${cityDate}, 
+        cloudiness  = ${cityWeather}, 
+        temperature = ${cityTemp}, 
+        windiness = ${cityWind}, 
+        humidity = ${cityHumid}, 
+        `
+    );
+}
+
+
 // ----------------------------- 3 ------------------------------
 // GET WEATHER USING LAT/LON WITH API CALL
 function getWeather(url) {
@@ -18,7 +43,7 @@ function getWeather(url) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            render(data);
             // console log data for now
         })
 }
