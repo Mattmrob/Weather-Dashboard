@@ -23,7 +23,7 @@ function render(data){
     // cityTemp returns as kelvin, so we convert it to faharenheit(?) and round it up so we dont have a suuper long value
     // we add a % to humidity and a mph to wind speed
 
-    // testing
+    // ensuring variables render as intended - CONFIRMED
     console.log(
         `
         city name = ${cityName}, 
@@ -34,6 +34,13 @@ function render(data){
         humidity = ${cityHumid}, 
         `
     );
+
+    /* TODO:
+       1) Render variable information to page
+       2) loop through data.list[1-5] for 5-day forecast and render to page (same variables, diff array no)
+       3) Save city name into localstorage + create history buttons that on click search that city (search button logic)
+       4) pull data from local storage when the page loads
+    */
 }
 
 
@@ -48,7 +55,7 @@ function getWeather(url) {
         })
         .then(function (data) {
             render(data);
-            // console log data for now
+            // *4 occurs
         })
 }
 
@@ -90,24 +97,3 @@ $(searchButton).on("click", function(event) {
     // api call for lat and lon using the formatted url
     // *2 occurs
 })
-
-
-
-
-
-
-
-
-// TODOS:
-
-// Create input that allows users to search for a city, which is then passed through the geocoding api
-// THEN extract geocoding api response lon & lat to be used in the 5-day-forcast API req
-// THEN display the response on the webpage for the next 5 days of weather for that city.
-
-// THINGS TO KEEP IN MIND:
-// using bootstrap
-// using jquery
-// persistant data is kept with local storage
-// include a history of perviously searched cities
-// when clicking on cities in your history, it performs a new api call ->
-// <- meaning we need to save city name and lon/lat to local storage for reuse (name for display, lon/lat for new api req)
