@@ -6,39 +6,46 @@
 const searchText = $("#citySearch");
 const searchButton = $("#searchButton");
 
-let cityName = "";
-
 let latLonUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=c57cbf4f07cb44866a70fe1c66c5d6fb';
 // url takes lat and long of city to perform weather forecast
 
-let cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=c57cbf4f07cb44866a70fe1c66c5d6fb`
-// user searches for a city name, so we first use an api call to get that city's lat and long, then plug it into the weather api
+// GET THE LAT/LON OF A CITY WITH API CALL
+function getLatLon(cityurl) {
 
-function getLatLong(city) {
+    fetch(cityurl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data[0].lat, data[0].lon);
+        })
 
 }
 
-// Weather Api Call function
+// GET WEATHER USING LAT/LON WITH API CALL
 function getWeather(url) {
 
     fetch(url)
         .then(function (response) {
-            console.log(response);
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            
         })
 }
 
-
+// SEARCH BUTTON LOGIC
 $(searchButton).on("click", function(event) {
     event.preventDefault();
-    cityName = searchText.val();
 
-    let trimmedCityUrl = cityName.split(" ").join("%20");
+    let cityName = searchText.val();
+    // set city name to the value of our input
 
-    getLatLon(trimmedCityUrl);
+    let cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=c57cbf4f07cb44866a70fe1c66c5d6fb`
+    // formatted url to search for city lat/lon based on user input
+
+    getLatLon(cityUrl);
+    // api call using the formatted url
 })
 
 
