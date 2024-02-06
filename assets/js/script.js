@@ -15,9 +15,13 @@ function render(data){
     let cityName = data.city.name;
     let cityDate = data.list[0].dt_txt.split(" ").shift();
     let cityWeather = data.list[0].weather[0].main;
-    let cityTemp = ((data.list[0].main.temp-273.15)*9/5+32) + " °F";
-    let cityWind = data.list[0].main.humidity + "%" ;
-    let cityHumid = data.list[0].wind.speed + " mph" ;
+    let cityTemp = Math.ceil((data.list[0].main.temp-273.15)*9/5+32) + " °F";
+    let cityWind = data.list[0].wind.speed + " mph";
+    let cityHumid = data.list[0].main.humidity + "%" ;
+    // NOTES ON VARIABLES:
+    // cityDate also returns a time, so we split it on a space and only take the first array item (date)
+    // cityTemp returns as kelvin, so we convert it to faharenheit(?) and round it up so we dont have a suuper long value
+    // we add a % to humidity and a mph to wind speed
 
     // testing
     console.log(
