@@ -210,7 +210,7 @@ $(searchButton).on("click", function(event) {
     let cityName = searchText.val();
     // set city name to the value of our input
 
-    let cityUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=c57cbf4f07cb44866a70fe1c66c5d6fb`
+    let cityUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=c57cbf4f07cb44866a70fe1c66c5d6fb`
     // formatted url to search for city lat/lon based on user input
 
     getLatLon(cityUrl)
