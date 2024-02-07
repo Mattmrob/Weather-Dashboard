@@ -5,43 +5,39 @@
 
 const searchText = $("#citySearch");
 const searchButton = $("#searchButton");
+const historyArea = $('.history');
+
+// historyList variable is used for local storage process
+let historyList = [];
 
 // order of events are numbered - input will always start with '1' then count up through the steps
 
-// local storage functionality?
-
-// stores input item into local storage
+// ----------------------------- 5 ------------------------------
+// LOCAL STORAGE PROCESS + RENDERING HISTORY
+// add a searched city's name to the historyList array, then send it to local storage
 function storeCity(name) {
-    localStorage.setItem("history", JSON.stringify(name));
+    historyList.unshift(name);
+    localStorage.setItem("history", JSON.stringify(historyList));
 }
 
-// loads item from storage then renders history
+// loads item from storage, limits history to 10 items
+// Appends a button to the history area with the name of the city name
 function loadStorage() {
-    favorites.empty();
-    favoriteList = JSON.parse(localStorage.getItem("favorites"));
+    historyArea.empty();
+    let historyList = JSON.parse(localStorage.getItem("history"));
+    console.log(historyList);
 
-    if (favoriteList === null) {
-        favoriteList = [];
+    if (historyList === null) {
+        historyList = [];
     }
 
-    if (favoriteList.length > 0) {
-        emptyFavorites.css("display","initial");
-    } else {
-        emptyFavorites.css("display","none");
+    for ( i = 10; historyList.length > i;) {
+        historyList.pop();
     }
 
-    for ( i = 10; favoriteList.length > i;) {
-        favoriteList.pop();
-    }
-
-    for (let i = 0; i < favoriteList.length; i++) {
-        let favoritesItem = $('<p class="favoritesItemTitle col-md-12"></p>').text(favoriteList[i][0])
-        let favoritesItemAuthor = $('<p class="favoritesItemAuthor col-md-12"></p>').text(' by ' + favoriteList[i][1])
-        $(favoritesItem).data('title', favoriteList[i][0])
-        $(favoritesItemAuthor).data('author', favoriteList[i][1])
-        $("#favorite-items").append(favoritesItem);
-        $("#favorite-items").append(favoritesItemAuthor);
-
+    for (let i = 0; i < historyList.length; i++) {
+        let historyItem = $(`<button class="historyCityName">${historyList[i]}</button>`)
+        historyArea.append(historyItem);
     }
 }
 
@@ -60,6 +56,11 @@ function render(data){
     // cityTemp returns as kelvin, so we convert it to faharenheit(?) and round it up so we dont have a suuper long value
     // we add a % to humidity and a mph to wind speed
 
+    let history = JSON.parse(localStorage.getItem("history"));
+
+    storeCity(cityName);
+    loadStorage();
+
     // ensuring variables render as intended - CONFIRMED
     console.log(
         `
@@ -75,8 +76,7 @@ function render(data){
     /* TODO:
        1) Render variable information to page
        2) loop through data.list[1-5] for 5-day forecast and render to page (same variables, diff array no)
-       3) Save city name into localstorage + create history buttons that on click search that city (search button logic)
-       4) pull data from local storage when the page loads
+       3) Create on click function so history buttons perform a search for that city
     */
 }
 
@@ -134,3 +134,5 @@ $(searchButton).on("click", function(event) {
     // api call for lat and lon using the formatted url
     // *2 occurs
 })
+
+loadStorage();
