@@ -8,6 +8,7 @@ const searchButton = $("#searchButton");
 const historyArea = $('.history');
 const currentDay = $('.currentDay');
 const fiveDayForecast = $('.forecast');
+const historyListButton = $('.historyCityName');
 
 // historyList variable is used for local storage process
 let historyList = [];
@@ -18,6 +19,7 @@ let historyList = [];
 // LOCAL STORAGE PROCESS + RENDERING HISTORY
 // add a searched city's name to the historyList array, then send it to local storage
 function storeCity(name) {
+    let historyList = JSON.parse(localStorage.getItem("history"));
     historyList.unshift(name);
     localStorage.setItem("history", JSON.stringify(historyList));
 }
@@ -37,7 +39,8 @@ function loadStorage() {
     }
 
     for (let i = 0; i < historyList.length; i++) {
-        let historyItem = $(`<button class="historyCityName">${historyList[i]}</button>`)
+        
+        let historyItem = $(`<p class="historyCityName">${historyList[i]}</p>`)
         historyArea.append(historyItem);
     }
 }
@@ -129,7 +132,7 @@ function render(data){
             }
         };
 
-    // end of render func
+    // **** end of 5-day forecast ****
     }
 
 
