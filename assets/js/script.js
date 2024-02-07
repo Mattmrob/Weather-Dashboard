@@ -20,6 +20,8 @@ let historyList = [];
 // add a searched city's name to the historyList array, then send it to local storage
 function storeCity(name) {
     let historyList = JSON.parse(localStorage.getItem("history"));
+
+    historyList = historyList.filter(item => item != name)
     historyList.unshift(name);
     localStorage.setItem("history", JSON.stringify(historyList));
 }
@@ -114,9 +116,10 @@ function render(data){
 
         // once our 5-day forecast array is 5 days long, loop through and render them
         if ( fiveDayForecastList.length === 5) {
+            console.log(fiveDayForecastList)
 
             // info to render
-            for (let e = 0; e < fiveDayForecastList.length; e++) {
+            for (let e = 0; e < 5; e++) {
                 let currentDayAreaForecast = $(`
                 <div class="forecastCard">
                     <h3>${fiveDayForecastList[e].date}</h3>
@@ -130,6 +133,7 @@ function render(data){
             // add new city data to currentDay div
             fiveDayForecast.append(currentDayAreaForecast);
             }
+            break;
         };
 
     // **** end of 5-day forecast ****

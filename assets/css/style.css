@@ -1,1 +1,31 @@
 /* for bootsctrap documentation: https://getbootstrap.com/docs/4.4/getting-started/introduction/ */
+
+.main-container {
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+}
+
+.header h1 {
+    text-align: center;
+}
+
+.body-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.forecast {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.forecastCard {
+    margin: 10px;
+}
