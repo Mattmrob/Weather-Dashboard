@@ -9,16 +9,89 @@
 
 .header {
     width: 100%;
+    background-color: rgb(49, 49, 104);
+    padding: 8px 0px 8px 0px;
 }
 
 .header h1 {
     text-align: center;
+    color: white;
 }
 
 .body-container {
+    width: 90%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+}
+
+.sidebar {
+    width: 300px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background-color: rebeccapurple;
+}
+
+.citySearch-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.sidebar input {
+    width: 95%;
+    text-align: center;
+    border-radius: 5px;
+    border: 0px;
+    margin: 6px 0px 6px 0px;
+}
+
+.sidebar button {
+    width: 95%;
+    background-color: rgb(56, 119, 214);
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    margin: 6px 0px 6px 0px;
+}
+
+.sidebar button:hover {
+    background-color: aqua;
+    color: rgb(49, 49, 104);
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    margin: 10px;
+    text-align: center;
+}
+
+.sidebar h3 {
+
+}
+
+.sidebar p {
+
+}
+
+.history {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 13px;
+    border-top: 1px solid grey;
+    padding: 15px;
+}
+
+.historyCityName {
+    width: 95%;
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px 0px 2px 0px;
 }
 
 .forecast {
