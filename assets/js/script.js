@@ -46,6 +46,12 @@ function loadStorage() {
 // function to render everything onto the page
 function render(data){
     console.log(data);
+
+    // list needed for 5-day forecast
+    let fiveDayForecastList = [];
+    // today and futureTime are used in our 5-day forecast
+    let today = data.list[0].dt_txt.split(" ").shift();
+
     // declare all needed variables for name, date, weather, temp, wind, and humidity
     let cityName = data.city.name;
     let cityDate = data.list[0].dt_txt.split(" ").shift();
@@ -58,61 +64,74 @@ function render(data){
     // cityTemp returns as kelvin, so we convert it to faharenheit(?) and round it up so we dont have a suuper long value
     // we add a % to humidity and a mph to wind speed
 
-    // information to render from searched city
+    // empty previous city information from currentDay div and forecast divs
+    currentDay.empty();
+    fiveDayForecast.empty();
+
+    // information to render from searched city into currentDay div
     let currentDayArea = $(`
     <h2>${cityName} (${cityDate}) ${cityWeather}</h2>
     <p>Temp: ${cityTemp}</p>
     <p>Wind: ${cityWind}</p>
     <p>Humidity: ${cityHumid}</p>
     `)
-    // empty previous city information from currentDay div and forecast divs
-    currentDay.empty();
-    fiveDayForecast.empty();
+    
     // add new city data to currentDay div
     currentDay.append(currentDayArea);
 
-    for (let i = 0; i < data.length; i++) {
-        let today = data.list[0].dt_txt.split(" ").shift();
+    // *** 5 - DAY - FORECAST ***
+    // only pull new days for 5-day forecast by cycling through results to find unique days
+    for (let i = 0; i < data.list.length; i++) {
+        // a future date that we are going to compare to our current date (today)
         let futureTime = data.list[i].dt_txt.split(" ").shift();
-        let fiveDayForecastList = [];
 
+        // altered version of dat variables that target the current looped information
         let cityDateForecast = data.list[i].dt_txt.split(" ").shift();
         let cityWeatherForecast = data.list[i].weather[0].main;
         let cityTempForecast = Math.ceil((data.list[i].main.temp-273.15)*9/5+32) + " °F";
         let cityWindForecast = data.list[i].wind.speed + " mph";
         let cityHumidForecast = data.list[i].main.humidity + "%";
 
-        if (today !== futureTime) {
+        // checks if the current date does not match the date we are asessing
+        // if it does not match, add that day's data to our fiveDayForecastList array as an object with key value pairs
+        if (today != futureTime) {
             fiveDayForecastList.push({
-                Date: cityDateForecast,
-                Weather: cityWeatherForecast,
-                Temp: cityTempForecast,
-                Wind: cityWindForecast,
-                Humid: cityHumidForecast
-            })
-        }
+                date: cityDateForecast,
+                weather: cityWeatherForecast,
+                temp: cityTempForecast,
+                wind: cityWindForecast,
+                humid: cityHumidForecast
+            });
 
-        if (fiveDayForecastList.length > 0) {
-            
-        }
+            // set current date to the new date, so that as we continue looping, we go until we find the next day
+            // going to day 2, 3, 4, ect
+            today = futureTime;
+            console.log(futureTime)
+        };
+
+        // once our 5-day forecast array is 5 days long, loop through and render them
+        if ( fiveDayForecastList.length === 5) {
+
+            // info to render
+            for (let e = 0; e < fiveDayForecastList.length; e++) {
+                let currentDayAreaForecast = $(`
+                <div class="forecastCard">
+                    <h3>${fiveDayForecastList[e].date}</h3>
+                    <p>${fiveDayForecastList[e].weather}<p>
+                    <p>Temp: ${fiveDayForecastList[e].temp}</p>
+                    <p>Wind: ${fiveDayForecastList[e].wind}</p>
+                    <p>Humidity: ${fiveDayForecastList[e].humid}</p>
+                </div>
+                `)
+
+            // add new city data to currentDay div
+            fiveDayForecast.append(currentDayAreaForecast);
+            }
+        };
+
+    // end of render func
     }
 
-    // 5-day forecast rendering - loop through next 5 days and append to forecast area
-    for (let i = 1; i < 6; i++) {
-
-        let currentDayAreaForecast = $(`
-        <div class="forecastCard">
-            <h3>${cityDateForecast}</h3>
-            <p>${cityWeatherForecast}<p>
-            <p>Temp: ${cityTempForecast}</p>
-            <p>Wind: ${cityWindForecast}</p>
-            <p>Humidity: ${cityHumidForecast}</p>
-        </div>
-        `)
-
-        // add new city data to currentDay div
-        fiveDayForecast.append(currentDayAreaForecast);
-    }
 
     // store cityname to storage then reload storage to render updated history
     storeCity(cityName);
