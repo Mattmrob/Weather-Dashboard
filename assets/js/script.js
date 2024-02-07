@@ -8,6 +8,43 @@ const searchButton = $("#searchButton");
 
 // order of events are numbered - input will always start with '1' then count up through the steps
 
+// local storage functionality?
+
+// stores input item into local storage
+function storeCity(name) {
+    localStorage.setItem("history", JSON.stringify(name));
+}
+
+// loads item from storage then renders history
+function loadStorage() {
+    favorites.empty();
+    favoriteList = JSON.parse(localStorage.getItem("favorites"));
+
+    if (favoriteList === null) {
+        favoriteList = [];
+    }
+
+    if (favoriteList.length > 0) {
+        emptyFavorites.css("display","initial");
+    } else {
+        emptyFavorites.css("display","none");
+    }
+
+    for ( i = 10; favoriteList.length > i;) {
+        favoriteList.pop();
+    }
+
+    for (let i = 0; i < favoriteList.length; i++) {
+        let favoritesItem = $('<p class="favoritesItemTitle col-md-12"></p>').text(favoriteList[i][0])
+        let favoritesItemAuthor = $('<p class="favoritesItemAuthor col-md-12"></p>').text(' by ' + favoriteList[i][1])
+        $(favoritesItem).data('title', favoriteList[i][0])
+        $(favoritesItemAuthor).data('author', favoriteList[i][1])
+        $("#favorite-items").append(favoritesItem);
+        $("#favorite-items").append(favoritesItemAuthor);
+
+    }
+}
+
 // ----------------------------- 4 ------------------------------
 // function to render everything onto the page
 function render(data){
