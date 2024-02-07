@@ -21,8 +21,14 @@ let historyList = [];
 function storeCity(name) {
     let historyList = JSON.parse(localStorage.getItem("history"));
 
-    historyList = historyList.filter(item => item != name)
-    historyList.unshift(name);
+    if (historyList != null) {
+        historyList = historyList.filter(item => item != name)
+        historyList.unshift(name);
+    } else {
+        console.log("history is empty!")
+        historyList = [name]
+    };
+
     localStorage.setItem("history", JSON.stringify(historyList));
 }
 
