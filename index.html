@@ -11,6 +11,51 @@
 </head>
 
 <body>
+
+    <!-- Contains everything -->
+    <div class="main-container">
+
+        <!-- holds the header -->
+        <div class="header">
+            <h1>Weather Dashboard</h1>
+        </div>
+
+        <!-- contains everything under the header -->
+        <div class="body-container">
+
+            <!-- contains sidebar elements  -->
+            <div class="sidebar">
+                <!-- contains citySearch input and searchButton -->
+                <div class="citySearch-container">
+                    <h2>Search for a City</h2>
+                    <!-- type a city name -->
+                    <input id="citySearch"
+                    placeholder="City...">
+                    <!-- activate button to search -->
+                    <button id="searchButton">Search</button>
+                </div>
+                <!-- where our previous searches will render -->
+                <div class="history">
+                </div>
+            </div>
+
+            <!-- contains api fetched weather information and 5-day forecast -->
+            <div class="weather-container">
+                <!-- renders weather for searched city here -->
+                <div class="currentDay">
+                </div>
+                <!-- renders weather for next 5 days of searched city here -->
+                <div class="forecast-container">
+                    <div class="forecast">
+                    </div>
+                </div>
+            </div>
+
+        <!-- body container closes -->
+        </div>
+
+    <!-- main container closes -->
+    </div>
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

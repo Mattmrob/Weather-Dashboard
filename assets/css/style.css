@@ -1,1 +1,131 @@
 /* for bootsctrap documentation: https://getbootstrap.com/docs/4.4/getting-started/introduction/ */
+
+.main-container {
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    background-color: rgb(49, 49, 104);
+    padding: 8px 0px 8px 0px;
+}
+
+.header h1 {
+    text-align: center;
+    color: white;
+}
+
+.body-container {
+    width: 90%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 300px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.citySearch-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.sidebar input {
+    width: 95%;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 6px 0px 6px 0px;
+}
+
+.sidebar button {
+    width: 95%;
+    background-color: rgb(56, 119, 214);
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    margin: 6px 0px 6px 0px;
+}
+
+.sidebar button:hover {
+    background-color: aqua;
+    color: rgb(49, 49, 104);
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    margin: 10px;
+    text-align: center;
+}
+
+.sidebar p {
+    font-size: 1.1em;
+}
+
+.history {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 13px;
+    border-top: 1px solid rgb(99, 99, 99);
+    padding: 15px;
+}
+
+.historyCityName {
+    width: 95%;
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px 0px 2px 0px;
+}
+
+.weather-container {
+    margin: 0px 15px 0px 15px;
+}
+
+.currentDay {
+    margin: 10px 0px 10px 0px;
+    border: 1px solid gray;
+}
+
+.currentDay h2 {
+    margin: 12px;
+}
+
+.currentDay p {
+    margin: 12px;
+}
+
+.forecast {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.forecastCard {
+    width: 170px;
+    margin: 10px;
+    background-color: rgb(54, 62, 70);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.forecastCard h3 {
+    color: white;
+    font-size: 1.5em;
+}
+
+.forecastCard p {
+    color: white;
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
+}
