@@ -121,11 +121,11 @@ function render(data){
         };
 
         // once our 5-day forecast array is 5 days long, loop through and render them
-        if ( fiveDayForecastList.length === 5) {
+        if ( fiveDayForecastList.length === 4) {
             console.log(fiveDayForecastList)
 
             // info to render
-            for (let e = 0; e < 5; e++) {
+            for (let e = 0; e < 4; e++) {
                 let currentDayAreaForecast = $(`
                 <div class="forecastCard">
                     <h3>${fiveDayForecastList[e].date}</h3>
@@ -138,6 +138,7 @@ function render(data){
 
             // add new city data to currentDay div
             fiveDayForecast.append(currentDayAreaForecast);
+            console.log(currentDayAreaForecast);
             }
             break;
         };
